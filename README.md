@@ -47,3 +47,53 @@ This repository contains a Bash script to safely upgrade all core components of 
    ```bash
    git clone https://github.com/yourusername/wazuh-upgrade-script.git
    cd wazuh-upgrade-script
+
+2. chmod +x wazuh-upgrade.sh
+3. sudo ./wazuh-upgrade.sh
+
+🔐 Indexer Preparation Details
+The script will prompt for:
+
+Wazuh Indexer IP address
+
+Username (e.g., admin)
+
+Password (entered silently)
+
+It will:
+
+Disable shard allocation
+
+Refresh all indices
+
+Check shard sync
+
+This prepares the indexer safely for upgrade per Wazuh documentation.
+
+📁 Backups
+Backups are stored in:
+
+swift
+Copy
+Edit
+/var/backups/wazuh_upgrade_<timestamp>/
+Log file location:
+
+pgsql
+Copy
+Edit
+/var/log/wazuh_upgrade_<timestamp>.log
+🚨 Error Handling
+If any service (wazuh-manager, filebeat, or kibana) fails to start, the script will stop and alert you.
+
+You’ll be able to check logs using:
+
+bash
+Copy
+Edit
+journalctl -xeu <service-name>
+
+Docker and multi-node versions
+
+📄 License
+MIT License. Use at your own risk.
