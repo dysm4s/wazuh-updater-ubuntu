@@ -29,9 +29,15 @@ echo
 find "$BACKUP_DIR" -maxdepth 1 -type d -name "wazuh_upgrade_*" | sort | nl
 
 read -rp "Enter the number of the backup you want to restore: " selection
+
+# Validate numeric input to prevent sed errors
+if [[ ! "$selection" =~ ^[0-9]+$ ]]; then
+    fail_exit "Selection must be a numeric value."
+fi
+
 SELECTED_BACKUP=$(find "$BACKUP_DIR" -maxdepth 1 -type d -name "wazuh_upgrade_*" | sort | sed -n "${selection}p")
 
-if [[ ! -d "$SELECTED_BACKUP" ]]; then
+if [[ ! -d "$SELECTED_BACKUP" || -z "$SELECTED_BACKUP" ]]; then
     fail_exit "Invalid selection or backup directory not found."
 fi
 

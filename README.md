@@ -73,25 +73,24 @@ This prepares the indexer safely for upgrade per Wazuh documentation.
 📁 Backups
 Backups are stored in:
 
-swift
-Copy
-Edit
+```
 /var/backups/wazuh_upgrade_<timestamp>/
+```
+
 Log file location:
 
-pgsql
-Copy
-Edit
+```
 /var/log/wazuh_upgrade_<timestamp>.log
+```
+
 🚨 Error Handling
-If any service (wazuh-manager, filebeat, or kibana) fails to start, the script will stop and alert you.
+If any service (`wazuh-manager`, `filebeat`, or `kibana`) fails to start, the script will stop and alert you.
 
 You’ll be able to check logs using:
 
-bash
-Copy
-Edit
+```bash
 journalctl -xeu <service-name>
+```
 
 Docker and multi-node versions
 
